@@ -43,9 +43,9 @@ import ClientLogin from "./ClientManagement/ClientLogin";
 import AboutOffice from "./ClientManagement/AboutOffice";
 import WhyUs from "./ClientManagement/WhyUs";
 import Services from "./ClientManagement/Services";
-import Fields from "./ClientManagement/Fields"; 
-import Team from "./ClientManagement/Team"; 
-import Careers from "./ClientManagement/Careers"; 
+import Fields from "./ClientManagement/Fields";
+import Team from "./ClientManagement/Team";
+import Careers from "./ClientManagement/Careers";
 
 import "./App.css";
 
@@ -60,7 +60,8 @@ function App() {
         <Route path="/login-lawyer" element={<LoginLawyer />} />
         <Route path="/login-employee" element={<LoginEmployee />} /> {/*  تمت الإضافة */}
         <Route path="/login" element={<ClientLogin setIsLoggedIn={setIsLoggedIn} />} />
-
+<Route path="/" element={<Login />} />
+<Route path="/admin-login" element={<Login />} />
         {/* --- مسارات لوحة تحكم المدير --- */}
         <Route element={<AdminLayout />}>
           <Route path="/dashboard" element={<AdminDashboardHome />} />
@@ -103,7 +104,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/careers" element={<Careers />} />
         </Route>
-        
+
       </Routes>
     </BrowserRouter>
   );

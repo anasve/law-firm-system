@@ -25,6 +25,7 @@ class AdminAuthController extends Controller
             'admin' => $admin,
             'token' => $token
         ]);
+
     }
 
     public function logout(Request $request)

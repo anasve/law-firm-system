@@ -16,15 +16,16 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; // <-- make sure this is imported
 
 // --- نظام الألوان الفاخر ---
 const colors = {
   gold: '#D4AF37',
   darkGold: '#b48f34',
-  black: '#121212', // أسود داكن جدًا
-  lightBlack: '#1E1E1E', // لون البطاقة
+  black: '#121212',
+  lightBlack: '#1E1E1E',
   white: '#FFFFFF',
-  textSecondary: '#A9A9A9', // رمادي فاتح للنصوص الثانوية
+  textSecondary: '#A9A9A9',
 };
 
 // --- المكونات المصممة ---
@@ -55,18 +56,18 @@ const StyledTextField = styled(TextField)({
 });
 
 const StyledButton = styled(Button)({
-    backgroundColor: colors.gold,
-    color: colors.black,
-    fontFamily: 'Cairo, sans-serif',
-    fontWeight: 'bold',
-    borderRadius: '8px',
-    padding: '12px',
-    fontSize: '1rem',
-    transition: 'background-color 0.3s ease, transform 0.2s ease',
-    '&:hover': {
-        backgroundColor: colors.darkGold,
-        transform: 'scale(1.02)',
-    },
+  backgroundColor: colors.gold,
+  color: colors.black,
+  fontFamily: 'Cairo, sans-serif',
+  fontWeight: 'bold',
+  borderRadius: '8px',
+  padding: '12px',
+  fontSize: '1rem',
+  transition: 'background-color 0.3s ease, transform 0.2s ease',
+  '&:hover': {
+    backgroundColor: colors.darkGold,
+    transform: 'scale(1.02)',
+  },
 });
 
 // --- المكون الرئيسي ---
@@ -78,18 +79,36 @@ export default function LoginAdminProMax() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    setTimeout(() => {
+
+    try {
+      await axios.get("http://127.0.0.1:8000/sanctum/csrf-cookie", {
+        withCredentials: true,
+      });
+
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/admin/login",
+        {
+          email: values.email,
+          password: values.password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+
+      // Success: redirect to dashboard or somewhere
+      navigate("/admin/dashboard");
+
+    } catch (err) {
+      console.error(err);
+      setError("فشل تسجيل الدخول. تحقق من البريد الإلكتروني أو كلمة المرور.");
+    } finally {
       setLoading(false);
-      if (values.email === "admin@lawoffice.com" && values.password === "admin123") {
-        navigate("/dashboard");
-      } else {
-        setError("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
-      }
-    }, 1500);
+    }
   };
 
   return (
@@ -126,7 +145,7 @@ export default function LoginAdminProMax() {
         </Box>
 
         {error && <Alert severity="error" variant="filled" sx={{ mb: 2 }}>{error}</Alert>}
-        
+
         <Box component="form" onSubmit={handleSubmit}>
           <StyledTextField
             fullWidth margin="normal" required id="email"

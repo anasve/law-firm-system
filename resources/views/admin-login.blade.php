@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Admin Login</title>
     @viteReactRefresh
-    @vite('resources/js/admin-login/main.jsx') {{-- or your real file --}}
+    @vite('resources/js/admin-login/index.jsx')
 </head>
+
 <body>
-    <div id="app"></div>
+    <div id="root"></div>
 </body>
+
 </html>

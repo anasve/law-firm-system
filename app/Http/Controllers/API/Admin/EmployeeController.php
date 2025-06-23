@@ -8,106 +8,88 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
+      // ✅ Get all specializations (optional search)
     public function index(Request $request)
     {
-        \Log::info('Search param:', ['search' => $request->query('search')]);
+        $query = Specialization::query();
 
-        $employees = Employee::query()
-            ->when($request->query('search'), function ($query, $search) {
-                return $query->where('name', $search);
-            })
-            ->latest()
-            ->get();
-
-        if ($employees->isEmpty()) {
-            return response()->json([
-                'message' => 'No employee found with the exact name.',
-            ], 404);
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        return response()->json($employees);
+        $specializations = $query->latest()->get();
+
+        if ($specializations->isEmpty()) {
+            return response()->json(['message' => 'No specializations found.'], 404);
+        }
+
+        return response()->json($specializations);
     }
 
-    // Show one employee
+    // ✅ Show one specialization
     public function show($id)
     {
-        $employee = Employee::findOrFail($id);
-
-        return response()->json($employee);
+        $spec = Specialization::findOrFail($id);
+        return response()->json($spec);
     }
 
-    // Store new employee
-    public function store(StoreEmployeeRequest $request)
+    // ✅ Store new specialization (no validation used)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
-        $employee = Employee::create($data);
+        $data = $request->only(['name', 'description']);
+        $spec = Specialization::create($data);
 
         return response()->json([
-            'message'  => 'Employee created successfully',
-            'employee' => $employee,
+            'message' => 'Specialization created successfully',
+            'specialization' => $spec,
         ], 201);
     }
 
-    // Update existing employee
-    public function update(UpdateEmployeeRequest $request, $id)
+    // ✅ Update specialization (no validation used)
+    public function update(Request $request, $id)
     {
-        $employee = Employee::findOrFail($id);
-        $data     = $request->validated();
+        $spec = Specialization::findOrFail($id);
+        $data = $request->only(['name', 'description']);
 
-        if (isset($data['password'])) {
-            $data['password'] = Hash::make($data['password']);
-        }
-
-        $employee->update($data);
+        $spec->update($data);
 
         return response()->json([
-            'message'  => 'Employee updated successfully',
-            'employee' => $employee,
+            'message' => 'Specialization updated successfully',
+            'specialization' => $spec,
         ]);
     }
 
-    // Soft delete (archive)
+    // ✅ Soft delete (archive)
     public function destroy($id)
     {
-        $employee = Employee::findOrFail($id);
-        $employee->delete();
+        $spec = Specialization::findOrFail($id);
+        $spec->delete();
 
-        return response()->json(['message' => 'Employee archived']);
+        return response()->json(['message' => 'Specialization archived']);
     }
 
-    // List archived employees
+    // ✅ List archived specializations
     public function archived()
     {
-        $employees = Employee::onlyTrashed()->get();
-
-        return response()->json($employees);
+        $archived = Specialization::onlyTrashed()->latest()->get();
+        return response()->json($archived);
     }
 
-    // Restore archived employee
+    // ✅ Restore archived specialization
     public function restore($id)
     {
-        $employee = Employee::onlyTrashed()->findOrFail($id);
-        $employee->restore();
+        $spec = Specialization::onlyTrashed()->findOrFail($id);
+        $spec->restore();
 
-        return response()->json(['message' => 'Employee restored successfully']);
+        return response()->json(['message' => 'Specialization restored successfully']);
     }
 
-    // Force delete employee permanently
+    // ✅ Force delete permanently
     public function forceDelete($id)
     {
-        $employee = Employee::onlyTrashed()->findOrFail($id);
-        $employee->forceDelete();
+        $spec = Specialization::onlyTrashed()->findOrFail($id);
+        $spec->forceDelete();
 
-        return response()->json(['message' => 'Employee permanently deleted']);
-    }
-
-    public function total()
-    {
-        return response()->json(['total_employees' => Employee::count()]);
+        return response()->json(['message' => 'Specialization permanently deleted']);
     }
 }

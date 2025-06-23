@@ -20,7 +20,3 @@ Route::get('/app', function () {
     return response()->file(public_path('react/index.html'));
 });
 
-
-Route::get('/admin-login', function () {
-    return view('admin-login');
-});

@@ -71,13 +71,6 @@ class LawController extends Controller
     // ✅ Create new law
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title'        => 'required|string|max:255',
-            'category'     => 'required|string|max:255',
-            'summary'      => 'required|string|max:500',
-            'full_content' => 'required|string',
-            'status'       => 'in:draft,published',
-        ]);
 
         $law = Law::create(array_merge($data, [
             'status' => $data['status'] ?? 'draft',
@@ -91,13 +84,6 @@ class LawController extends Controller
     {
         $law = Law::findOrFail($id);
 
-        $data = $request->validate([
-            'title'        => 'sometimes|required|string|max:255',
-            'category'     => 'sometimes|required|string|max:255',
-            'summary'      => 'sometimes|required|string|max:500',
-            'full_content' => 'sometimes|required|string',
-            'status'       => 'sometimes|in:draft,published',
-        ]);
 
         $law->update($data);
 
