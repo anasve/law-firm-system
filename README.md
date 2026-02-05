@@ -1,58 +1,57 @@
-<<<<<<< HEAD
- # مشروع law
+## Law Project
 
-مشروع **law** هو مشروع برمجي متعلق بالمجال القانوني (صياغة عقود، إدارة ملفات، أو أتمتة عمليات قانونية). يمكنك تعديل هذا الوصف لاحقًا بما يناسب هدف مشروعك بدقة.
+This repository contains the **law** project, which is intended for legal-related software (for example: contract drafting, case management, document automation, or other legal workflows).  
+You can freely update this description later to precisely match your actual project.
 
-## محتوى هذا المستودع
+## Repository structure
 
-حاليًا لا يحتوي المجلد إلا على هذا الملف. بعد إضافة ملفات المشروع (كود، مستندات، إلخ) يُنصح بتحديث هذا القسم لشرح البنية:
+At the moment, this folder only contains the `README.md` file.  
+After you add your code and other assets, it is recommended to document the structure here, for example:
 
-- مجلد `src`: ملفات الكود (إن وُجدت).
-- مجلد `docs`: التوثيق الإضافي (إن وُجد).
+- `src`: application source code.
+- `docs`: additional documentation.
 
-## المتطلبات المسبقة
+## Prerequisites
 
-بما أن المشروع لم يُضف له كود بعد، فلا توجد متطلبات محددة. بعد اختيار تقنية التنفيذ (مثل **Node.js**, **Python**, **.NET** ...) قم بتحديث هذا القسم، مثلاً:
+Since there is no code yet, there are no strict prerequisites.  
+After you decide on your stack (e.g. **Node.js**, **Python**, **.NET**, etc.), update this section. For example:
 
-- **Node.js**: إصدار 18 أو أحدث.
-- **Python**: إصدار 3.10 أو أحدث.
+- **Node.js**: version 18 or newer.
+- **Python**: version 3.10 or newer.
 
-## طريقة التشغيل
+## Getting started
 
-بعد إضافة الكود، قم بتحديث هذه الخطوات على حسب التقنية المستخدمة، مثلاً:
+Update these commands according to the technology you choose. Examples:
 
 ```bash
-# مثال لمشروع Node.js
+# Example for a Node.js project
 npm install
 npm run dev
 ```
 
-أو:
+or:
 
 ```bash
-# مثال لمشروع Python
+# Example for a Python project
 pip install -r requirements.txt
 python main.py
 ```
 
-## المزايا (اقترحات يمكنك تعديلها)
+## Features (suggested, editable)
 
-- **إدارة القضايا**: تسجيل القضايا، العملاء، والمحامين.
-- **إدارة المستندات**: حفظ العقود والمذكرات القانونية.
-- **التقويم والتنبيهات**: مواعيد الجلسات والمواعيد النهائية.
+You can adjust this list to match your real idea:
 
-عدّل هذه القائمة بما يطابق فكرة مشروعك.
+- **Case management**: track cases, clients, and lawyers.
+- **Document management**: store contracts, legal memos, and templates.
+- **Calendar and reminders**: manage hearings, deadlines, and important dates.
 
-## المساهمة
+## Contribution
 
-1. قم بعمل fork للمشروع.
-2. أنشئ فرعًا جديدًا للتعديلات الخاصة بك.
-3. أرسل Pull Request مع وصف واضح للتغييرات.
+1. Fork this repository.
+2. Create a new branch for your changes.
+3. Open a Pull Request with a clear description of what you changed.
 
-## الرخصة
+## License
 
-حدد هنا نوع الرخصة (مثل MIT أو GPL أو غيرها) بعد اختيار ما يناسبك.
+Specify the license you want to use here (e.g. MIT, GPL, or any other license that fits your needs).
 
-=======
-# law-firm-system
->>>>>>> 0f71d3ee98882641001d0c7f586537ed32a35e3d
